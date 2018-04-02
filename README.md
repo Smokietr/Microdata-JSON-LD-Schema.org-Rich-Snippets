@@ -95,15 +95,15 @@ Marking up content on your website can:
 | ------------- | ------------- | ------------- |
 | itemprop=“name”             | The name of the item being marked up. | All |
 | itemprop=“description”      | Describe the item being marked up.    | All |
-| itemprop=“aggregateRating”  | The overall rating, based on a collection of reviews or ratings of the item.                  | CreativeWork |
-| itemprop=“ratingValue”      | The rating for the content.           | Rating |
-| itemprop=“reviewCount”      | The total number of reviews.          | AggregateRating |
-| itemprop=“author”           | The author of this content. HTML 5 rel=author tag can be utilised instead. | CreativeWork |
-| itemprop=“datePublished”    | Date of first broadcast/publication.  | CreativeWork |
-| itemprop=“reviewRating”     | The rating given in this review.      | Rating |
-| itemprop=“reviewBody”       | The actual body of the review.        | CreativeWork |
-| itemprop=“worstRating”      | The lowest possible rating.           | Rating |
-| itemprop=“bestRating”       | The highest possible rating.          | Rating |
+| itemprop=“aggregateRating”  | The overall rating, based on a collection of reviews or ratings of the item.                  | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“ratingValue”      | The rating for the content.           | [Rating](http://schema.org/Rating) |
+| itemprop=“reviewCount”      | The total number of reviews.          | [AggregateRating](http://schema.org/AggregateRating) |
+| itemprop=“author”           | The author of this content. HTML 5 rel=author tag can be utilised instead. | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“datePublished”    | Date of first broadcast/publication.  | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“reviewRating”     | The rating given in this review.      | [Rating](http://schema.org/Rating) |
+| itemprop=“reviewBody”       | The actual body of the review.        | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“worstRating”      | The lowest possible rating.           | [Rating](http://schema.org/Rating) |
+| itemprop=“bestRating”       | The highest possible rating.          | [Rating](http://schema.org/Rating) |
 
 
 ### 1.3 The mark-up
@@ -214,10 +214,10 @@ Extending the capability of the review mark up for products can lead to this typ
 | ------------- | ------------- | ------------- |
 | itemprop=“name”             | The name of the item being marked up. | All |
 | itemprop=“description”      | Describe the item being marked up.    | All |
-| itemprop=”price“            | The price stated for a product.       | Offer |
-| itemprop=”aggregateRating“  | The overall rating, based on a collection of reviews or ratings of the item.  | CreativeWork |
-| itemprop=”ratingValue“      | The rating for the content.           | Rating |
-| itemprop=”reviewCount“      | The total number of reviews.          | AggregateRating |
+| itemprop=”price“            | The price stated for a product.       | [Offer](http://schema.org/Offer) |
+| itemprop=”aggregateRating“  | The overall rating, based on a collection of reviews or ratings of the item.  | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=”ratingValue“      | The rating for the content.           | [Rating](http://schema.org/Rating) |
+| itemprop=”reviewCount“      | The total number of reviews.          | [AggregateRating](http://schema.org/AggregateRating) |
 
 ### 2.3 The mark-up
 
@@ -337,12 +337,12 @@ Individual reviews in an editorial format can also be marked up to generate an e
 
 | Itemprop      | Description   | Property of   |
 | ------------- | ------------- | ------------- |
-| itemprop=“itemreviewed”     | The name of the item being reviewed.  | Review |
-| itemprop=“worstRating”      | The worst possible rating.            | Rating |
-| itemprop=“bestRating”       | The highest possible rating.          | Rating |
-| itemprop=“ratingValue”      | The rating for the content.           | Rating |
-| itemprop=“datePublished”    | The publication date of the review.   | Review |
-| itemprop=“author”           | The name of the author.               | Review |
+| itemprop=“itemreviewed”     | The name of the item being reviewed.  | [Review](http://schema.org/Review) |
+| itemprop=“worstRating”      | The worst possible rating.            | [Rating](http://schema.org/Rating) |
+| itemprop=“bestRating”       | The highest possible rating.          | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingValue”      | The rating for the content.           | [Rating](http://schema.org/Rating) |
+| itemprop=“datePublished”    | The publication date of the review.   | [Review](http://schema.org/Review) |
+| itemprop=“author”           | The name of the author.               | [Review](http://schema.org/Review) |
 
 ### 3.3 The mark-up
 
@@ -509,13 +509,13 @@ There is no direct impact to the text displayed alongside the review segment; ho
 | ------------- | ------------- | ------------- |
 | itemprop=“name”             | The name of the item being marked up.            | All |
 | itemprop=“description”      | Describe the item being marked up.               | All |
-| itemprop=“director”         | The director of the movie, tv series or episode. | Movie |
+| itemprop=“director”         | The director of the movie, tv series or episode. | [Movie](http://schema.org/Movie) |
 | itemprop=”url“              | URL of the item.                                 | All |
-| itemprop=“author”	      | The author of this content.                      | CreativeWork |
-| itemprop=“bestRating”       | The highest possible rating.                     | Rating |
-| itemprop=“ratingValue”      | The rating for the content.                      | Rating |
-| itemprop=“ratingCount”      | The number of ratings obtained.                  | AggregateRating |
-| itemprop=“actor”            | A cast member of the movie.                      | Movie |
+| itemprop=“author”	      | The author of this content.                      | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“bestRating”       | The highest possible rating.                     | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingValue”      | The rating for the content.                      | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingCount”      | The number of ratings obtained.                  | [AggregateRating](http://schema.org/AggregateRating) |
+| itemprop=“actor”            | A cast member of the movie.                      | [Movie](http://schema.org/Movie) |
 
 ### 4.3 The mark-up
 
