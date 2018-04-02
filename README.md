@@ -3,6 +3,36 @@ This guide has been created to provide a quick and easy way of generating differ
 
 I must point out that before you proceed with integrating any form of mark-up, you should be aware of the guidelines provided by Google, and Bing. Any attempt to mark-up content that is invisible to users, or content that is irrelevant/misleading just to generate the rich snippet may result in action being taken against your website.
 
+1. [**What is Microdata?**](#what-is-microdata)
+2. [**What is JSON-LD**](#what-is-json-ld)
+3. [**What is Schema.org?**](#what-is-schemaorg)
+4. [**Why use mark-up?**](#why-use-mark-up)
+5. [**Using Review Data to Enhance Your Search Result Snippets**](#using-review-data-to-enhance-your-search-result-snippets)
+6. Draw Attention to your Products with Richer Snippets
+7. Maximise the Impact of Editorial Reviews in Search
+8. Swoop a Grammy by Marking-up Movie Content
+9. Bring Your TV Listing Search Results to Life
+10. Show Business Credibility in Search Results
+11. Use Recipe Mark-up to Generate Appetising Rich Snippets
+12. Tell Us About Yourself with Person Mark-up
+13. Sell Tickets for Multiple Events with a Single Search Listing
+14. Dramatically Increase Size of Search Results for Audio Coverage
+15. Generate Rich Media Listings with Video Mark-up
+16. Create Interactive Breadcrumb Trails for your Search Listings
+17. Logo & Social Sitelinks in Knowledge Graph
+18. SearchAction – Sitelinks Search Box
+19. InDepth Article Markup
+20. Gmail – View Action
+21. Gmail – Save Action
+22. Gmail – Confirm Action
+23. Gmail – RSVP Action
+24. Gmail – Numeric Rating
+25. Gmail – Parcel Delivery
+26. Gmail – View Order
+27. Gmail – Event Booking
+28. Gmail – Flight Booking
+29. Tools & Resources
+
 ## What is Microdata?
 
 Microdata (like RDFa and Microformats) is a form of semantic mark-up designed to describe elements on a web page e.g. review, person, event etc. This mark-up can be combined with typical HTML properties to dedlfine each item type through the use of associated attributes. For example, ‘Person’ has the properties name, url and title – attributes can be applied to HTML tags to describe each property:
