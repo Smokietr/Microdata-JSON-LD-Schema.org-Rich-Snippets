@@ -12,7 +12,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
 7. [**Maximise the Impact of Editorial Reviews in Search**](#maximise-the-impact-of-editorial-reviews-in-search)
 8. [**Swoop a Grammy by Marking-up Movie Content**](#swoop-a-grammy-by-marking-up-movie-content)
 9. [**Bring Your TV Listing Search Results to Life**](#bring-your-tv-listing-search-results-to-life)
-10. Show Business Credibility in Search Results
+10. [**Show Business Credibility in Search Results**](#show-business-credibility-in-search-results)
 11. Use Recipe Mark-up to Generate Appetising Rich Snippets
 12. Tell Us About Yourself with Person Mark-up
 13. Sell Tickets for Multiple Events with a Single Search Listing
@@ -22,16 +22,17 @@ I must point out that before you proceed with integrating any form of mark-up, y
 17. Logo & Social Sitelinks in Knowledge Graph
 18. SearchAction – Sitelinks Search Box
 19. InDepth Article Markup
-20. Gmail – View Action
-21. Gmail – Save Action
-22. Gmail – Confirm Action
-23. Gmail – RSVP Action
-24. Gmail – Numeric Rating
-25. Gmail – Parcel Delivery
-26. Gmail – View Order
-27. Gmail – Event Booking
-28. Gmail – Flight Booking
-29. Tools & Resources
+20. Gmail
+    - View Action
+    - Save Action
+    – Confirm Action
+    – RSVP Action
+    – Numeric Rating
+    – Parcel Delivery
+    – View Order
+    – Event Booking
+    – Flight Booking
+21. Tools & Resources
     - Tools
     - Plugins
        - Wordpress
@@ -744,6 +745,88 @@ The structured data testing tool does not yet display the additional line of tex
 
 **Further Reading:** [TVSeries](http://schema.org/TVSeries), [TVSeason](http://schema.org/TVSeason) & [TVEpisode](http://schema.org/TVEpisode) – Schema.org
 
+# Show Business Credibility in Search Results
 
+### 6.1 Example snippet
+
+Local Business Schema.org alone does not yet result in a specific type of snippet, although can be combined with standard review mark-up to produce the below snippet:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/6-1example.jpg" />
+
+Local Business schema.org mark-up can also act as authentication for a business address if it matches the Google Business Listing, in doing so improve local SEO.
+
+### 6.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/LocalBusiness              | Describes a physical business or branch of an organization. |
+| http://www.schema.org/PostalAddress              | The location of the event or organization.                  |
+| http://www.schema.org/AggregateRating            | The average rating based on multiple ratings or reviews.    |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.              | All |
+| itemprop=“streetAddress”    | The street address.                                | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“addressLocality”  | The locality.                                      | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“addressRegion”    | The region.                                        | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“postalCode”	      | The postal code.                                   | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“telephone”        | The telephone number.                              | [ContactPoint](http://schema.org/ContactPoint) |
+| itemprop=“ratingValue”      | The rating for the content.                        | [Rating](http://schema.org/Rating) |
+| temprop=“bestRating”        | The best possible rating.                          | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingCount”      | The number of ratings obtained.                    | [AggregateRating](http://schema.org/AggregateRating) |
+
+### 6.3 The mark-up
+Utilising review mark-up and combining Local Business schema:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "LocalBusiness",
+  "name": "[business name]",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[street name]",
+    "addressLocality": "[locality]",
+    "addressRegion": "[region]",
+    "postalCode": "[postal code]"
+  },
+  "telephone": "[telephone number]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[aggregate rating given]",
+    "bestRating": "[highest rating]",
+    "reviewCount": "[total number of reviews]"
+  }
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/LocalBusiness">
+  <span itemprop="name">[business name]</span>
+  <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <span itemprop="streetAddress">[street name]</span>
+    <span itemprop="addressLocality">[locality]</span>,
+    <span itemprop="addressRegion">[region]</span>
+    <span itemprop="postalCode">[postal code]</span>
+  </div>
+  <span itemprop="telephone">[telephone number]</span>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating given]</span>/
+    <span itemprop="bestRating">[highest rating]</span> stars from
+    <span itemprop="reviewCount">[total number of reviews]</span> users.
+  </div>
+</div>
+```
+**Further Reading:** [LocalBusiness](http://schema.org/LocalBusiness) & [PostalAddress](http://schema.org/PostalAddress) – Schema.org, [Business Schema Tool](http://www.microdatagenerator.com/local-business-schema/) – microData generator
 
 # To be continued...
