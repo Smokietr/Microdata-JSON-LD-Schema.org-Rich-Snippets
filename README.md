@@ -8,8 +8,8 @@ I must point out that before you proceed with integrating any form of mark-up, y
 3. [**What is Schema.org?**](#what-is-schemaorg)
 4. [**Why use mark-up?**](#why-use-mark-up)
 5. [**Using Review Data to Enhance Your Search Result Snippets**](#using-review-data-to-enhance-your-search-result-snippets)
-6. Draw Attention to your Products with Richer Snippets
-7. Maximise the Impact of Editorial Reviews in Search
+6. [**Draw Attention to your Products with Richer Snippets**](#draw-attention-to-your-products-with-richer-snippets)
+7. [**Maximise the Impact of Editorial Reviews in Search**](#maximise-the-impact-of-editorial-reviews-in-search)
 8. Swoop a Grammy by Marking-up Movie Content
 9. Bring Your TV Listing Search Results to Life
 10. Show Business Credibility in Search Results
@@ -323,5 +323,164 @@ This can be further extended to include ‘In Stock’ within the rich snippet b
 Individual reviews in an editorial format can also be marked up to generate an extension of the ratings snippet to include the author name and publication date:
 
 <img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/3-1example.jpg" />
+
+### 3.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Review               | A review of an item e.g. product or movie.                |
+| http://www.schema.org/Rating               | An individual rating given for an item.                   |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“itemreviewed”     | The name of the item being reviewed.  | Review |
+| itemprop=“worstRating”      | The worst possible rating.            | Rating |
+| itemprop=“bestRating”       | The highest possible rating.          | Rating |
+| itemprop=“ratingValue”      | The rating for the content.           | Rating |
+| itemprop=“datePublished”    | The publication date of the review.   | Review |
+| itemprop=“author”           | The name of the author.               | Review |
+
+### 3.3 The mark-up
+
+The mark-up for an editorial review:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Review",
+  "itemReviewed": "[The item being reviewed]",
+  "reviewRating": {
+    "@type": "Rating",
+    "bestRating": "[best rating]",
+    "worstRating": "[worst rating]",
+    "ratingValue": "[rating received]"
+  },
+  "datePublished": "[date in ISO format e.g. 2012-04-15]",
+  "author": "[author name]"
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemprop="review" itemscope itemtype="http://schema.org/Review">
+  <span itemprop="itemreviewed">[the item being reviewed]</span>
+  <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+    <meta itemprop="worstRating" content = "[worst rating]">
+    <meta itemprop="bestRating" content="[best rating]">
+    <meta itemprop="ratingValue" content="[rating received]">
+  </div>
+  <span itemprop="datePublished" content="[date in ISO format e.g. 2012-04-15]">[publication date]</span>
+  <span itemprop="author">[author name]</span>
+</div>
+```
+
+### 3.4 The test…
+
+Filling in the blanks, the resulting SERP using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/3-4test.jpg" />
+
+### 3.5 Extending this mark-up
+
+By altering this code slightly, combining properties from schema.org/Product we can add a price to the snippet as well:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Review",
+  "itemReviewed": "[the item being reviewed]",
+  "reviewRating": {
+    "@type": "Rating",
+    "bestRating": "[best rating]",
+    "worstRating": "[worst rating]",
+    "ratingValue": "[rating received]"
+  },
+  "datePublished": "[date in ISO format e.g. 2012-04-15]",
+  "author": "[author name]",
+  "offers": {
+    "@type": "Offer",
+    "price": "[product sale price]",
+    "priceCurrency": "[currency in 3 letter ISO 4217 format e.g. USD]"
+  }
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Product">
+  <span itemprop="name">[product being reviewed]</span>
+  <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+    <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+      <meta itemprop="worstRating" content = "[worst possible rating]">
+      <meta itemprop="bestRating" content="[best possible rating]">
+      <meta itemprop="ratingValue" content="[rating given]">
+    </div>
+    <span itemprop="author">[author name]</span>
+    <span itemprop="datePublished" content="[date in ISO format e.g. 2012-04-15]"> [publication date]</span>
+  </div>
+  <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <span itemprop="price">[product price]</span>
+  </span>
+</div>
+```
+
+This would create the following snippet:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/3-5-1test.jpg" />
+
+You can extend this even further to include a price range; just replace the schema.org/Offer section with:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Review",
+  "itemReviewed": "[the item being reviewed]",
+  "reviewRating": {
+    "@type": "Rating",
+    "bestRating": "[best rating]",
+    "worstRating": "[worst rating]",
+    "ratingValue": "[rating received]"
+  },
+  "datePublished": "[date in ISO format e.g. 2012-04-15]",
+  "author": "[author name]",
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "[lowest product price]",
+    "highPrice": "[highest product price]",
+    "priceCurrency": "[currency in 3 letter ISO 4217 format e.g. USD]"
+  }
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<span itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+  <span itemprop="lowPrice">[lowest retail price]</span>
+  to <span itemprop="highPrice">[highest retail price]</span>
+</span>
+```
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/3-5-2test.jpg" />
+
+**Further Reading:** [Individual Reviews](https://developers.google.com/search/docs/data-types/review?visit_id=1-636582744460117386-443891566&hl=en&rd=1#Individual_reviews) – Google Webmaster Help, [Review](http://schema.org/Review) – Schema.org
 
 # To be continued...
