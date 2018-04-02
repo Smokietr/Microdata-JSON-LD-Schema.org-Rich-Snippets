@@ -25,13 +25,13 @@ I must point out that before you proceed with integrating any form of mark-up, y
 20. Gmail
     - View Action
     - Save Action
-    – Confirm Action
-    – RSVP Action
-    – Numeric Rating
-    – Parcel Delivery
-    – View Order
-    – Event Booking
-    – Flight Booking
+    - Confirm Action
+    - RSVP Action
+    - Numeric Rating
+    - Parcel Delivery
+    - View Order
+    - Event Booking
+    - Flight Booking
 21. Tools & Resources
     - Tools
     - Plugins
