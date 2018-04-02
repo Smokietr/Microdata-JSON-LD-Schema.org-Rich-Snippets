@@ -11,7 +11,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
 6. [**Draw Attention to your Products with Richer Snippets**](#draw-attention-to-your-products-with-richer-snippets)
 7. [**Maximise the Impact of Editorial Reviews in Search**](#maximise-the-impact-of-editorial-reviews-in-search)
 8. [**Swoop a Grammy by Marking-up Movie Content**](#swoop-a-grammy-by-marking-up-movie-content)
-9. Bring Your TV Listing Search Results to Life
+9. [**Bring Your TV Listing Search Results to Life**](#bring-your-tv-listing-search-results-to-life)
 10. Show Business Credibility in Search Results
 11. Use Recipe Mark-up to Generate Appetising Rich Snippets
 12. Tell Us About Yourself with Person Mark-up
@@ -596,6 +596,147 @@ Filling in the blanks, the resulting snippet using the structured data testing t
 
 The structured data testing tool does not yet display the additional line of text with references to actors/directors, however if implemented correctly the displayed data extract should contain this information.
 
-Further Reading: [Movie Schema.org Creator](https://raventools.com/site-auditor/seo-guide/schema-structured-data) – Raven Tools, [Movie](http://schema.org/Movie) – Schema.org
+**Further Reading:** [Movie Schema.org Creator](https://raventools.com/site-auditor/seo-guide/schema-structured-data) – Raven Tools, [Movie](http://schema.org/Movie) – Schema.org
+
+# Bring Your TV Listing Search Results to Life
+
+### 5.1 Example live snippet
+
+There is also specific mark up for a TV series/season/episode which can also be combined with the review mark-up to produce a similar snippet as ‘Movie’:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/5-1example.jpg" />
+
+The result is the same as Schema.org/Movie with an additional line of text included referencing the director(s) and actor(s), however a further line has been inserted for episodes and episodes cast.
+
+### 5.2 The core mark-up features at a glance:
+
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/TVSeries               | Describes a television series.                            |
+| http://www.schema.org/TVSeason               | Describes a single TV season.                             |
+| http://www.schema.org/TVEpisode              | The episode of a TV series or season.                     |
+| http://www.schema.org/Person                 | Describes a person (living, dead or fictional).           |
+| http://www.schema.org/AggregateRating        | The average rating based on multiple ratings or reviews.  |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.              | All |
+| itemprop=“description”      | Describe the item being marked up.                 | All |
+| itemprop=“director”         | The director of the movie, tv series or episode.   | [TVSeries](http://schema.org/TVSeries), [TVSeason](http://schema.org/TVSeason), [TVEpisode](http://schema.org/Episode) |
+| itemprop=“actor”            | A cast member of the TV series, season or episode. | [TVSeries](http://schema.org/TVSeries), [TVSeason](http://schema.org/TVSeason), [TVEpisode](http://schema.org/Episode) |
+| itemprop=“author”	      | The author of this content.                        | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“numberofEpisodes” | The number of episodes in the series or season.    | [TVSeries](http://schema.org/TVSeries), [TVSeason](http://schema.org/TVSeason) |
+| itemprop=“datePublished”    | Date of first broadcast/publication.               | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“episode”          | An episode of a TV series of season.               | [TVSeries](http://schema.org/TVSeries), [TVSeason](http://schema.org/TVSeason) |
+| itemprop=“numberofEpisodes” | The episode number.                                | [TVEpisode](http://schema.org/Episode) |
+| itemprop=“ratingValue”      | The rating for the content.                        | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingCount”      | The number of ratings obtained.                    | [AggregateRating](http://schema.org/AggregateRating) |
+
+### 5.3 The mark-up
+
+Utilising review mark-up and combining TV series, season and episode schema:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "TVSeries",
+  "name": "[name of show]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[aggregate rating given]",
+    "ratingCount": "[number of reviews]",
+    "bestRating": "[best possible rating]"
+  },
+ "description": "[description of the TV show]",
+ "author": {
+    "@type": "Person",
+    "name": "[writers name]"
+ },
+ "actor": [
+    {
+      "@type": "Person",
+      "name": "[actors name]"
+    },
+    {
+      "@type": "Person",
+      "name": "[actors name]"
+    }
+  ],
+  "season": [
+    {
+      "@type": "TVSeason",
+      "name": "[season]",
+      "numberOfEpisodes": "[no. of episodes]",
+      "datePublished": "[date in ISO format e.g. 2012-04-15]"
+    },
+    {
+      "@type": "TVSeason",
+      "name": "[season]",
+      "numberOfEpisodes": "[no. of episodes]",
+      "datePublished": "[date in ISO format e.g. 2012-04-15]",
+      "episode": {
+        "@type": "TVEpisode",
+        "episodeNumber": "[episode number]",
+        "name": "[name of episode]"
+      }
+    }
+  ]
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/TVSeries">
+  <h1 itemprop="name">[name of TV show]</h1>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating given]</span>/
+    <span itemprop="bestRating">[best possible rating]</span> stars from
+    <span itemprop="ratingCount">[total number of reviews]</span> users.
+  </div>
+  <span itemprop="description">[description of the TV show]</span>
+  <div itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <span itemprop="name">[actor’s name]</span>
+  </div>
+  <div itemprop="actor" itemscope itemtype="http://schema.org/Person">
+    <span itemprop="name">[actor’s name]</span>
+  </div>
+  <div itemprop="season" itemscope itemtype="http://schema.org/TVSeason">
+    <span itemprop="name">[season 1, 2 or 3...?]</span> -
+    <meta itemprop="numberofEpisodes" content="[number of episodes in this season]"/>
+    <meta itemprop="datePublished" content="[date in ISO format e.g. 2012-04-15]">[broadcast date]
+  </div>
+  <div itemprop="season" itemscope itemtype="http://schema.org/TVSeason">
+    <span itemprop="name">[season 1, 2 or 3...?]</span> -
+    <meta itemprop="numberofEpisodes" content="[number of episodes in this season]"/>
+    <meta itemprop="datePublished" content="[date in ISO format e.g. 2012-04-15]"> [broadcast date]
+    <div itemprop="episode" itemscope itemtype="http://schema.org/TVEpisode">
+      <span itemprop="name">[episode name]</span> -
+      <meta itemprop="episodeNumber" content="[episode number]"/>
+    </div>
+  </div>
+</div>
+```
+
+### 5.4 The Test…
+
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/5-4test.jpg" />
+
+The structured data testing tool does not yet display the additional line of text with references to episodes/episodes cast, however if implemented correctly the displayed data extract should contain this information.
+
+**Further Reading:** [TVSeries](http://schema.org/TVSeries), [TVSeason](http://schema.org/TVSeason) & [TVEpisode](http://schema.org/TVEpisode) – Schema.org
+
+
 
 # To be continued...
