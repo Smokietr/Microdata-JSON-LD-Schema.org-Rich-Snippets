@@ -7,7 +7,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
 
 Microdata (like RDFa and Microformats) is a form of semantic mark-up designed to describe elements on a web page e.g. review, person, event etc. This mark-up can be combined with typical HTML properties to dedlfine each item type through the use of associated attributes. For example, ‘Person’ has the properties name, url and title – attributes can be applied to HTML tags to describe each property:
 
-```
+```HTML
 <div itemscope itemtype="http://data-vocabulary.org/Person">
   Name: <span itemprop="name">Özgür Can Karagöz</span>
   Website: <a href="https://www.oxyn.org" itemprop="url">oxyn.org</a>
@@ -43,4 +43,121 @@ Marking up content on your website can:
 - Search engines and organisations are using this mark-up to develop new tools, for example Google Recipe Search, which may open up other marketing channels if not now, in the near future.
 - Provide greater information to search engines to improve their understanding of the content on your website.
 
-# To be continued
+## Using Review Data to Enhance Your Search Result Snippets
+### Example live snippet
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/sg-ebay.png">
+
+### 1.2 The core mark-up features at a glance:
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/AggregateRating      | The average rating based on multiple ratings or reviews. |
+| http://www.schema.org/Review               | A review of an item e.g. product or movie.               |
+| http://www.schema.org/Rating               | An individual rating given for an item.                  |
+	
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up. | All |
+| itemprop=“description”      | Describe the item being marked up.    | All |
+| itemprop=“aggregateRating”  | The overall rating, based on a collection of reviews or ratings of the item.                  | CreativeWork |
+| itemprop=“ratingValue”      | The rating for the content.           | Rating |
+| itemprop=“reviewCount”      | The total number of reviews.          | AggregateRating |
+| itemprop=“author”           | The author of this content. HTML 5 rel=author tag can be utilised instead. | CreativeWork |
+| itemprop=“datePublished”    | Date of first broadcast/publication.  | CreativeWork |
+| itemprop=“reviewRating”     | The rating given in this review.      | Rating |
+| itemprop=“reviewBody”       | The actual body of the review.        | CreativeWork |
+| itemprop=“worstRating”      | The lowest possible rating.           | Rating |
+| itemprop=“bestRating”       | The highest possible rating.          | Rating |
+
+
+### 1.3 The mark-up
+The following code examples form the bare-bone template mark-up for review data. The first part of this example forms the aggregate rating, and could be utilised by itself to generate the rich snippet from point 1.1:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Product",
+  "name": "[the name of the product]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[rating]",
+    "reviewCount": "[number of reviews]"
+  }
+}
+</script>
+```
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Product">
+  <span itemprop="name">[the name of the product]</span>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating]</span> stars – based on
+    <span itemprop="reviewCount">[number of reviews]</span> reviews
+  <div>
+</div>
+```
+The second piece of mark up should be utilised on each review, this also adds further validity to the aggregate rating defined above:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Product",
+  "name": "[the name of the product]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[rating]",
+    "reviewCount": "[number of reviews]"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "name": "[review title/summary]",
+      "author": "[name of reviewer]",
+      "datePublished": "[date in ISO format e.g. 2012-04-15]",
+      "description": "[the actual user review text]",
+      "reviewRating": {
+        "@type": "Rating",
+        "bestRating": "[highest possible rating]",
+        "ratingValue": "[rating given by reviewer]",
+        "worstRating": "[lowest possible rating]"
+      }   
+    }
+  ]
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemprop="review" itemscope itemtype="http://schema.org/Review">
+  <span itemprop="name">[review title/summary]</span> - by
+  <span itemprop="author">[name of reviewer]</span>,
+  <meta itemprop="datePublished" content="[date in ISO format e.g. 2012-04-15]">April 15th, 2012
+  <div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+    <meta itemprop="worstRating" content="[lowest possible rating]">
+    <span itemprop="ratingValue">[rating given by reviewer]</span>/
+    <span itemprop="bestRating">[highest possible rating]</span>stars
+  </div>
+  <span itemprop="description">[The actual user review text]</span>
+</div>
+```
+
+### 1.4 The Test…
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/test-1-1.png" />
+
+**Further Reading:** [Review Schema.org Creator](https://raventools.com/site-auditor/seo-guide/schema-structured-data) – Raven Tools, [Rich Snippets: Reviews Video](https://www.youtube.com/watch?v=n0SF6PLCx4I) – Google Webmaster Help, [Review & AggregateRating](http://schema.org/AggregateRating) – Schema.org
+
+
+# To be continued...
