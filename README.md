@@ -10,7 +10,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
 5. [**Using Review Data to Enhance Your Search Result Snippets**](#using-review-data-to-enhance-your-search-result-snippets)
 6. [**Draw Attention to your Products with Richer Snippets**](#draw-attention-to-your-products-with-richer-snippets)
 7. [**Maximise the Impact of Editorial Reviews in Search**](#maximise-the-impact-of-editorial-reviews-in-search)
-8. Swoop a Grammy by Marking-up Movie Content
+8. [**Swoop a Grammy by Marking-up Movie Content**](#swoop-a-grammy-by-marking-up-movie-content)
 9. Bring Your TV Listing Search Results to Life
 10. Show Business Credibility in Search Results
 11. Use Recipe Mark-up to Generate Appetising Rich Snippets
@@ -482,5 +482,120 @@ You can extend this even further to include a price range; just replace the sche
 <img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/3-5-2test.jpg" />
 
 **Further Reading:** [Individual Reviews](https://developers.google.com/search/docs/data-types/review?visit_id=1-636582744460117386-443891566&hl=en&rd=1#Individual_reviews) – Google Webmaster Help, [Review](http://schema.org/Review) – Schema.org
+
+# Swoop a Grammy by Marking-up Movie Content
+
+### 4.1 Example live snippet
+
+Schema.org review mark-up when combined with the schema.org/Movie itemtype can produce the following type of snippet:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/4-1example.jpg" />
+
+There is no direct impact to the text displayed alongside the review segment; however an additional line is inserted alongside the Meta description featuring the directors and actors starring in the film.
+
+### 4.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Movie                | Describes a film.                                         |
+| http://www.schema.org/Person               | Describes a person (living, dead or fictional).           |
+|http://www.schema.org/AggregateRating       | The average rating based on multiple ratings or reviews.  |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.            | All |
+| itemprop=“description”      | Describe the item being marked up.               | All |
+| itemprop=“director”         | The director of the movie, tv series or episode. | Movie |
+| itemprop=”url“              | URL of the item.                                 | All |
+| itemprop=“author”	      | The author of this content.                      | CreativeWork |
+| itemprop=“bestRating”       | The highest possible rating.                     | Rating |
+| itemprop=“ratingValue”      | The rating for the content.                      | Rating |
+| itemprop=“ratingCount”      | The number of ratings obtained.                  | AggregateRating |
+| itemprop=“actor”            | A cast member of the movie.                      | Movie |
+
+### 4.3 The mark-up
+
+Exploiting review mark-up for a Movie:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Movie",
+  "name": "[name of the movie]",
+  "description": "[description of the movie]",
+  "director": {
+    "@type": "Person",
+    "name": "[director's name]"
+  },
+  "author": {
+      "@type": "Person",
+      "name": "[script writer]"
+  },
+  "actor": [
+    {
+      "@type": "Person",
+      "name": "[actor's name]"
+    },
+    {
+      "@type": "Person",
+      "name": "[actor's name]"
+    },
+    {
+      "@type": "Person",
+      "name": "[actor's name]"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "bestRating": "[best possible rating]",
+    "ratingCount": "[total ratings received]",
+    "ratingValue": "[rating given]"
+  } 
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Movie">
+  <h1 itemprop="name">[name of the movie]</h1>
+  <span itemprop="description">[description of the movie]</span>
+  <div itemprop="director" itemscope itemtype="http://schema.org/Person">
+    <a href="[url]" itemprop="url"><span itemprop="name">[director’s name]</span></a>
+  </div>
+  <div itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <a href="[url]" itemprop="url"><span itemprop="name">[script writer]</span></a>
+  </div>
+  <div itemprop="actor" itemscope itemtype="http://schema.org/Person">
+    <a href="[url]" itemprop="url"><span itemprop="name">[actor’s name]</span></a>,
+  </div>
+  <div itemprop="actor" itemscope itemtype="http://schema.org/Person">
+    <a href="[url]" itemprop="url"><span itemprop="name">[actor’s name]</span></a>,
+  </div>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating given]</span>/
+    <span itemprop="bestRating">[best possible rating]</span> stars from
+    <span itemprop="ratingCount">[total ratings received]</span> users.
+  </div>
+</div>
+```
+
+### 4.4 The Test…
+
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/4-4test.jpg" />
+
+The structured data testing tool does not yet display the additional line of text with references to actors/directors, however if implemented correctly the displayed data extract should contain this information.
+
+Further Reading: [Movie Schema.org Creator](https://raventools.com/site-auditor/seo-guide/schema-structured-data) – Raven Tools, [Movie](http://schema.org/Movie) – Schema.org
 
 # To be continued...
