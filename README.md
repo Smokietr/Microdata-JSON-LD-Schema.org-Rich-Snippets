@@ -192,5 +192,136 @@ Filling in the blanks, the resulting snippet using the structured data testing t
 
 **Further Reading:** [Review Schema.org Creator](https://raventools.com/site-auditor/seo-guide/schema-structured-data) – Raven Tools, [Rich Snippets: Reviews Video](https://www.youtube.com/watch?v=n0SF6PLCx4I) – Google Webmaster Help, [Review & AggregateRating](http://schema.org/AggregateRating) – Schema.org
 
+# Draw Attention to your Products with Richer Snippets
+### 2.1 Example live snippet
+
+Extending the capability of the review mark up for products can lead to this type of rich snippet:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/sg-ebay.png" />
+
+### 2.2 The core mark-up features at a glance:
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Product              | Describes a product on sale.                              |
+| http://www.schema.org/Offer                | Describes a products offer details.                       |
+| http://www.schema.org/AggregateRating      | The average rating based on multiple ratings or reviews.  |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up. | All |
+| itemprop=“description”      | Describe the item being marked up.    | All |
+| itemprop=”price“            | The price stated for a product.       | Offer |
+| itemprop=”aggregateRating“  | The overall rating, based on a collection of reviews or ratings of the item.  | CreativeWork |
+| itemprop=”ratingValue“      | The rating for the content.           | Rating |
+| itemprop=”reviewCount“      | The total number of reviews.          | AggregateRating |
+
+### 2.3 The mark-up
+
+Exploiting review mark-up for a product with offer details:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Product",
+  "name": "[product name]",
+  "offers": {
+    "@type": "Offer",
+    "price": "[product sale price]",
+    "priceCurrency": "[currency in 3 letter ISO 4217 format e.g. USD]"
+  },
+    "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[aggregate rating given]",
+    "reviewCount": "[number of reviews]"
+  }
+ }
+ </script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Product">
+  <span itemprop="name">[product name]</span>
+  <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <span itemprop="price">[product sale price]</span>
+  </span>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[aggregate rating given]</span> stars – based on
+    <span itemprop="reviewCount">[number of reviews]</span> reviews
+  </div>
+</div>
+```
+
+As an aggregate review rating has been given for this product, the individual corresponding user reviews will need to be marked up using the code identified in part two of point 1.3.
+
+### 2.4 The Test…
+
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/2-4test.jpg" />
+
+### 2.5 Extending this mark-up
+
+By altering the /Offer segment of the code to the below we can add a price range to the snippet:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/2-5test.jpg" />
+
+**JSON-LD**
+
+```javascript
+JSON-LD DISPLAYED IN ITS ENTIRETY:
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Product",
+  "name": "[product name]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[aggregate rating given]",
+    "reviewCount": "[number of reviews]"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "[lowest product price]",
+    "highPrice": "[highest product price]",
+    "priceCurrency": "[currency in 3 letter ISO 4217 format e.g. USD]"
+ }
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<span itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+  <span itemprop="lowPrice">[lowest product price]</span> to
+  <span itemprop="highPrice">[highest product price]</span>
+</span>
+```
+
+This can be further extended to include ‘In Stock’ within the rich snippet by including the following line also within the /Offer segment:
+
+```HTML
+"availability": "http://schema.org/InStock"
+<link itemprop="availability" href="http://schema.org/InStock" >
+```
+
+**Further Reading:** [Product Schema.org Creator](http://schema-creator.org/product.php) – Raven Tools, [Rich Snippets: Products](https://developers.google.com/search/docs/data-types/product?visit_id=1-636582735837372902-962109021&hl=en&rd=1) – Google Webmaster Help, [Product](http://schema.org/Product) & [Offer](http://schema.org/Offer) – Schema.org
+
+# Maximise the Impact of Editorial Reviews in Search
+
+### 3.1 Example live snippet
+
+Individual reviews in an editorial format can also be marked up to generate an extension of the ratings snippet to include the author name and publication date:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/3-1example.jpg" />
 
 # To be continued...
