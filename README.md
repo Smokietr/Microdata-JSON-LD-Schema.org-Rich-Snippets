@@ -38,7 +38,10 @@ Schema.org is a universally supported vocabulary extension by Google, Microsoft 
 Marking up content on your website can:
 
 - Lead to the generation of rich snippets in search engine results e.g.
-<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/sg-ebay.png">
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/sg-ebay.png" />
+
+
 - This has the potential to enhance CTR from the search results from anywhere between 10-25%.
 - Search engines and organisations are using this mark-up to develop new tools, for example Google Recipe Search, which may open up other marketing channels if not now, in the near future.
 - Provide greater information to search engines to improve their understanding of the content on your website.
