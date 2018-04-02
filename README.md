@@ -32,6 +32,13 @@ I must point out that before you proceed with integrating any form of mark-up, y
 27. Gmail – Event Booking
 28. Gmail – Flight Booking
 29. Tools & Resources
+    - Tools
+    - Plugins
+       - Wordpress
+       - Magento
+       - Joomla
+       - Drupal
+    - Useful Resources
 
 ## What is Microdata?
 
