@@ -13,7 +13,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
 8. [**Swoop a Grammy by Marking-up Movie Content**](#swoop-a-grammy-by-marking-up-movie-content)
 9. [**Bring Your TV Listing Search Results to Life**](#bring-your-tv-listing-search-results-to-life)
 10. [**Show Business Credibility in Search Results**](#show-business-credibility-in-search-results)
-11. Use Recipe Mark-up to Generate Appetising Rich Snippets
+11. [**Use Recipe Mark-up to Generate Appetising Rich Snippets**](#use-recipe-mark-up-to-generate-appetising-rich-snippets)
 12. Tell Us About Yourself with Person Mark-up
 13. Sell Tickets for Multiple Events with a Single Search Listing
 14. Dramatically Increase Size of Search Results for Audio Coverage
@@ -827,6 +827,137 @@ Utilising review mark-up and combining Local Business schema:
   </div>
 </div>
 ```
+
 **Further Reading:** [LocalBusiness](http://schema.org/LocalBusiness) & [PostalAddress](http://schema.org/PostalAddress) – Schema.org, [Business Schema Tool](http://www.microdatagenerator.com/local-business-schema/) – microData generator
+
+# Use Recipe Mark-up to Generate Appetising Rich Snippets
+
+### 7.1 Example live snippet
+Another more developed Schema.org type is Recipe, which allows for the development of rich snippets like the below:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/7-1example.jpg" />
+
+There are a lot more elements however taken from the Recipe schema which determine visibility in Google’s recipe search – [http://www.google.com/landing/recipes/](http://www.google.com/landing/recipes/)
+
+### 7.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Recipe	                   | Describes a recipe.                                         |
+| http://www.schema.org/NutritionInformation       | Describes the nutrition information of a recipe.            |
+| http://www.schema.org/AggregateRating            | The average rating based on multiple ratings or reviews.    |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”               | The name of the item being marked up.              | All |
+| itemprop=“image”              | URL of an image of the item.                       | All |
+| itemprop=“author”	        | The author of this content.                        | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“description”        | Describe the item being marked up.                 | All |
+| itemprop=“ingredients”        | An ingredient used in the recipe.                  | [Recipe](http://schema.org/Recipe) |
+| itemprop=“recipeCategory”     | The category of the recipe e.g. starter.           | [Recipe](http://schema.org/Recipe) |
+| itemprop=“recipeCuisine”      | The cuisine of the recipe e.g. Chinese             | [Recipe](http://schema.org/Recipe) |
+| itemprop=“recipeYield”        | The quantity produced by the recipe.	           | [Recipe](http://schema.org/Recipe) |
+| itemprop=“cookTime”           | The time it takes to cook the dish in ISO duration format. | [Recipe](http://schema.org/Recipe) |
+| itemprop=“prepTime”           | The length of time it takes to prepare the recipe. | [AggregateRating](http://schema.org/AggregateRating) |
+| itemprop=“calories”           | The number of calories.                            | [NutritionInfomation](http://schema.org/NutritionInfomation) |
+| itemprop=“fatContent”         | The number of grams of fat.                        | [NutritionInfomation](http://schema.org/NutritionInfomation) |
+| itemprop=“recipeInstructions” | The steps to make the dish.                        | [Recipe](http://schema.org/Recipe) |
+| itemprop=“ratingValue”        | The rating for the content.                        | [Rating](http://schema.org/Rating) |
+| itemprop=“bestRating”         | The best possible rating.                          | [Rating](http://schema.org/Rating) |
+| itemprop=“reviewCount”        | The number of reviews obtained.                    | [AggregateRating](http://schema.org/AggregateRating) |
+
+### 7.3 The mark-up
+
+Utilising review mark-up and combining the recipe schema:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Recipe",
+  "author": "[author name]",
+  "datePublished": "[date in ISO format e.g. 2012-04-15]",
+  "name": "[recipe name]",
+  "image" : "[recipe image url]",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[aggregate rating given]",
+    "bestRating": "[highest rating]",
+    "reviewCount": "[total number of reviews]"
+  },
+  "description" : "[a description of the recipe]",
+  "ingredients" : [
+    "[ingredient 1]",
+    "[ingredient 2]",
+    "[ingredient 3]",
+    "[ingredient 4]"
+   ],
+  "recipeCategory": "[url to recipe category]",
+  "recipeCuisine": "[url to recipe cuisine category]",
+  "recipeYield": "[recipe yield]",
+  "cookTime": "[ISO duration format e.g. PT2H45M]",
+  "prepTime": "[ISO duration format e.g. PT2H45M]",
+  "nutrition": {
+    "@type": "NutritionInformation",
+    "calories": "[total calories]",
+    "fatContent": "[grams of fat]"
+  },
+  "recipeInstructions" : [
+    "[instruction 1]",
+    "[instruction 2]",
+    "[instruction 3]"
+  ]
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Recipe">
+  <span itemprop="author">[author name]</span>
+  <span itemprop="datePublished" content="[date in ISO format e.g. 2012-04-15]">[publication date]</span>
+  <span itemprop="name">[recipe name]</span>
+  <img itemprop="image" src="[recipe image url]" />
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating given]</span>/
+    <span itemprop="bestRating">[highest possible rating]</span> stars from
+    <span itemprop="reviewCount">[total number of reviews]</span> users.
+  </div>
+  <span itemprop="description">[a description of the recipe]</span>
+  <ul>
+    <li itemprop="ingredients">[ingredient 1]</li>
+    <li itemprop="ingredients">[ingredient 2]</li>
+    <li itemprop="ingredients">[ingredient 3]</li>
+    ...
+  </ul>
+  <span itemprop="recipeCategory"><a href="[url to recipe category]">[recipe category]</a></span>
+  <span itemprop="recipeCuisine"><a href="[url to recipe cuisine category]">[recipe cuisine]</a></span>
+  <span itemprop="recipeYield">[recipe yield]</span>
+  <span itemprop="cookTime" content="[ISO duration format e.g. PT2H45M]">[cooking time]</span>
+  <span itemprop="prepTime" content="[ISO duration format e.g. PT45M]">[prep time]</span>
+  <div itemprop="nutrition" itemscope itemtype="http://schema.org/NutritionInformation">
+    <span itemprop="calories">[total calories]</span>
+    <span itemprop="fatContent">[grams of fat]</span>
+  </div>
+  <ol itemprop="recipeInstructions">
+    <li>1. [Instruction 1]...</li>
+  </ol>
+</div>
+```
+
+### 7.4 The test…
+
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/7-4test.jpg" />
+
+**Further Reading:** [Recipe](http://schema.org/Recipe) & [NutritionInformation](http://schema.org/NutritionInformation) – Schema.org, [Recipe Schema Tool](http://www.microdatagenerator.com/recipe-schema/) – microDATA generator, [Rich Snippet Recipes](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=173379) – Google Webmaster Help
 
 # To be continued...
