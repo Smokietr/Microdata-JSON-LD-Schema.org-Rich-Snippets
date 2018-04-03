@@ -14,15 +14,16 @@ I must point out that before you proceed with integrating any form of mark-up, y
 9. [**Bring Your TV Listing Search Results to Life**](#bring-your-tv-listing-search-results-to-life)
 10. [**Show Business Credibility in Search Results**](#show-business-credibility-in-search-results)
 11. [**Use Recipe Mark-up to Generate Appetising Rich Snippets**](#use-recipe-mark-up-to-generate-appetising-rich-snippets)
-12. Tell Us About Yourself with Person Mark-up
-13. Sell Tickets for Multiple Events with a Single Search Listing
-14. Dramatically Increase Size of Search Results for Audio Coverage
-15. Generate Rich Media Listings with Video Mark-up
-16. Create Interactive Breadcrumb Trails for your Search Listings
-17. Logo & Social Sitelinks in Knowledge Graph
-18. SearchAction – Sitelinks Search Box
-19. InDepth Article Markup
-20. Gmail
+12. [**Add Authenticity & Trust to Mobile App Listings**](#add-authenticity-&-trust-to-mobile-app-listings)
+13. Tell Us About Yourself with Person Mark-up
+14. Sell Tickets for Multiple Events with a Single Search Listing
+15. Dramatically Increase Size of Search Results for Audio Coverage
+16. Generate Rich Media Listings with Video Mark-up
+17. Create Interactive Breadcrumb Trails for your Search Listings
+18. Logo & Social Sitelinks in Knowledge Graph
+19. SearchAction – Sitelinks Search Box
+20. InDepth Article Markup
+21. Gmail
     - View Action
     - Save Action
     - Confirm Action
@@ -32,7 +33,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
     - View Order
     - Event Booking
     - Flight Booking
-21. Tools & Resources
+22. Tools & Resources
     - Tools
     - Plugins
        - Wordpress
@@ -509,7 +510,7 @@ There is no direct impact to the text displayed alongside the review segment; ho
 | ------------- | ------------- |
 | http://www.schema.org/Movie                | Describes a film.                                         |
 | http://www.schema.org/Person               | Describes a person (living, dead or fictional).           |
-|http://www.schema.org/AggregateRating       | The average rating based on multiple ratings or reviews.  |
+| http://www.schema.org/AggregateRating      | The average rating based on multiple ratings or reviews.  |
 
 **Itemprop** attributes utilised:
 
@@ -959,5 +960,126 @@ Filling in the blanks, the resulting snippet using the structured data testing t
 <img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/7-4test.jpg" />
 
 **Further Reading:** [Recipe](http://schema.org/Recipe) & [NutritionInformation](http://schema.org/NutritionInformation) – Schema.org, [Recipe Schema Tool](http://www.microdatagenerator.com/recipe-schema/) – microDATA generator, [Rich Snippet Recipes](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=173379) – Google Webmaster Help
+
+# 8. Add Authenticity & Trust to Mobile App Listings
+
+### 8.1 Example snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/8-1example.jpg" />
+
+### 8.2 The core mark-up features at a glance:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/MobileApplication    | Describes a Mobile application.                           |
+| http://www.schema.org/Organization         | Describes an organization.                                |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.            | All |
+| itemprop=“image”            | URL of an image of the item.                     | All |
+| itemprop=“description”      | Describe the item being marked up.               | All |
+| itemprop=”url“              | URL of the item.                                 | All |
+| itemprop=“author”	      | The author of this content.                      | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=”datePublished“    | Date of first broadcast/publication.             | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“operatingSystems” | The operating systems supported.                 | [SoftwareApplication](http://schema.org/SoftwareApplication) |
+| itemprop=“fileSize”         | Size of the application.                         | [SoftwareApplication](http://schema.org/SoftwareApplication) |
+| itemprop=“interactionCount” | A count of a specific user interaction with this item. | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“contentRating”    | Official rating for a piece of content.	         | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“bestRating”       | The highest possible rating.                     | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingValue”      | The rating for the content.                      | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingCount”      | The number of ratings obtained.                  | [AggregateRating](http://schema.org/AggregateRating) |
+
+### 8.3 The mark-up
+
+Applying Mobile Application mark-up:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+    "@type": "MobileApplication",
+    "image": "[image url for application icon]",
+    "name": "[name of the mobile application]",
+    "author": {
+      "@type": "Organization",
+      "url": "[author url]",
+      "name": "[developer name]"
+    },
+  "aggregateRating": {
+    "@type" : "AggregateRating",
+    "ratingValue" : "[rating given]",
+    "bestRating" : "[highest possible rating]",
+    "ratingCount" : "[total number of ratings]"
+  },
+  "datePublished": "[date in ISO format e.g. 2012-04-15]",
+  "operatingSystem": "[supported operating system]",
+  "fileSize" : "[file size e.g. 14mb]",
+  "interactionCount" : "[number of user downloads]",
+  "contentRating" : "[content rating e.g. Low Maturity]",
+  "description" : "[description of the mobile application]",
+  "applicationCategory" : "[application category e.g. http://schema.org/GameApplication]"
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/MobileApplication">
+  <img itemprop="image" src="[image URL for application icon]" />
+  <span itemprop="name">[name of the mobile application]</span> -
+  <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+    <a itemprop="url" href="[author url]"><span itemprop="name">[developer name]</span></a>
+  </div>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating given]</span>/
+    <span itemprop="bestRating">[highest possible rating]</span> stars from
+    <span itemprop="ratingCount">[total number of ratings]</span> users.
+  </div>
+  <time itemprop="datePublished" datetime="[date in ISO format e.g. 2012-04-15]">[publication date]</time>
+  <span itemprop="operatingSystems">[supported operating system]</span>
+  <meta itemprop="fileSize" content="[file size e.g. 14MB]"/>
+  <meta itemprop="interactionCount" content="[number of user downloads] UserDownloads">
+  <span itemprop="contentRating">[content rating e.g. Low Maturity]</span>
+  <span itemprop="description">[description of the mobile application]</span>
+</div>
+```
+
+### 8.4 The test…
+
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/8-4test.jpg" />
+
+### 8.5 Extending this mark-up
+
+By combining some properties from schema.org/Offers we can add a price to the snippet. Just add the below mark up:
+
+**JSON-LD**
+
+```javascript
+"Offers": {
+    "@type" : "Offer",
+    "price" : "[app price]"
+}
+```
+
+**Microdata**
+
+```HTML
+<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+  <span itemprop="price">[price]</span>
+</div>
+```
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/8-5test.jpg" />
+
+**Further Reading:** [MobileApplication](http://schema.org/MobileApplication) – Schema.org, [Rich Snippets for Apps: a New Way to be Seen in SERPs](http://searchenginewatch.com/article/2123992/Rich-Snippets-for-Apps-A-New-Way-to-be-Seen-in-SERPs) – SEWatch generator, [Rich Snippets: Software Applications](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1645432) – Google Webmaster Help
+
 
 # To be continued...
