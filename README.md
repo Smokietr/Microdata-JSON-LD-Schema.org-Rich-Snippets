@@ -14,7 +14,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
 9. [**Bring Your TV Listing Search Results to Life**](#bring-your-tv-listing-search-results-to-life)
 10. [**Show Business Credibility in Search Results**](#show-business-credibility-in-search-results)
 11. [**Use Recipe Mark-up to Generate Appetising Rich Snippets**](#use-recipe-mark-up-to-generate-appetising-rich-snippets)
-12. [**Add Authenticity & Trust to Mobile App Listings**](#add-authenticity-&-trust-to-mobile-app-listings)
+12. [**Add Authenticity & Trust to Mobile App Listings**](#add-authenticity--trust-to-mobile-app-listings)
 13. Tell Us About Yourself with Person Mark-up
 14. Sell Tickets for Multiple Events with a Single Search Listing
 15. Dramatically Increase Size of Search Results for Audio Coverage
@@ -961,7 +961,7 @@ Filling in the blanks, the resulting snippet using the structured data testing t
 
 **Further Reading:** [Recipe](http://schema.org/Recipe) & [NutritionInformation](http://schema.org/NutritionInformation) – Schema.org, [Recipe Schema Tool](http://www.microdatagenerator.com/recipe-schema/) – microDATA generator, [Rich Snippet Recipes](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=173379) – Google Webmaster Help
 
-# 8. Add Authenticity & Trust to Mobile App Listings
+# Add Authenticity & Trust to Mobile App Listings
 
 ### 8.1 Example snippet
 
