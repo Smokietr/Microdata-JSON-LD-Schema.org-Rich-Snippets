@@ -15,15 +15,16 @@ I must point out that before you proceed with integrating any form of mark-up, y
 10. [**Show Business Credibility in Search Results**](#show-business-credibility-in-search-results)
 11. [**Use Recipe Mark-up to Generate Appetising Rich Snippets**](#use-recipe-mark-up-to-generate-appetising-rich-snippets)
 12. [**Add Authenticity & Trust to Mobile App Listings**](#add-authenticity--trust-to-mobile-app-listings)
-13. Tell Us About Yourself with Person Mark-up
-14. Sell Tickets for Multiple Events with a Single Search Listing
-15. Dramatically Increase Size of Search Results for Audio Coverage
-16. Generate Rich Media Listings with Video Mark-up
-17. Create Interactive Breadcrumb Trails for your Search Listings
-18. Logo & Social Sitelinks in Knowledge Graph
-19. SearchAction – Sitelinks Search Box
-20. InDepth Article Markup
-21. Gmail
+13. [**Promote Software Applications in Search Results**](#promote-software-applications-in-search-results)
+14. [**Tell Us About Yourself with Person Mark-up**](#tell-us-about-yourself-with-person-mark-up)
+15. [**Sell Tickets for Multiple Events with a Single Search Listing**](#sell-tickets-for-multiple-events-with-a-single-search-listing)
+16. Dramatically Increase Size of Search Results for Audio Coverage
+17. Generate Rich Media Listings with Video Mark-up
+18. Create Interactive Breadcrumb Trails for your Search Listings
+19. Logo & Social Sitelinks in Knowledge Graph
+20. SearchAction – Sitelinks Search Box
+21. InDepth Article Markup
+22. Gmail
     - View Action
     - Save Action
     - Confirm Action
@@ -33,7 +34,7 @@ I must point out that before you proceed with integrating any form of mark-up, y
     - View Order
     - Event Booking
     - Flight Booking
-22. Tools & Resources
+23. Tools & Resources
     - Tools
     - Plugins
        - Wordpress
@@ -981,7 +982,7 @@ Filling in the blanks, the resulting snippet using the structured data testing t
 | itemprop=“name”             | The name of the item being marked up.            | All |
 | itemprop=“image”            | URL of an image of the item.                     | All |
 | itemprop=“description”      | Describe the item being marked up.               | All |
-| itemprop=”url“              | URL of the item.                                 | All |
+| itemprop=”url“              | URL of the item.                                 | [CreativeWork](http://schema.org/CreativeWork) |
 | itemprop=“author”	      | The author of this content.                      | [CreativeWork](http://schema.org/CreativeWork) |
 | itemprop=”datePublished“    | Date of first broadcast/publication.             | [CreativeWork](http://schema.org/CreativeWork) |
 | itemprop=“operatingSystems” | The operating systems supported.                 | [SoftwareApplication](http://schema.org/SoftwareApplication) |
@@ -1081,5 +1082,264 @@ By combining some properties from schema.org/Offers we can add a price to the sn
 
 **Further Reading:** [MobileApplication](http://schema.org/MobileApplication) – Schema.org, [Rich Snippets for Apps: a New Way to be Seen in SERPs](http://searchenginewatch.com/article/2123992/Rich-Snippets-for-Apps-A-New-Way-to-be-Seen-in-SERPs) – SEWatch generator, [Rich Snippets: Software Applications](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1645432) – Google Webmaster Help
 
+# Promote Software Applications in Search Results
+
+### 9.1 Example live snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/9-1example.jpg" />
+
+Software Application mark-up is very similar to Mobile; however there are some additional features that can be included to develop this snippet.
+
+### 9.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/SoftwareApplication  | Describes a Mobile application.                           |
+| http://www.schema.org/Organization         | Describes an organization.                                |
+| http://www.schema.org/AggregateRating      | The average rating based on multiple ratings or reviews.  |
+| http://www.schema.org/Offer                | Describes a products offer details.                       |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.            | All |
+| itemprop=“image”            | URL of an image of the item.                     | All |
+| itemprop=“description”      | Describe the item being marked up.               | All |
+| itemprop=”url“              | URL of the item.                                 | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“author”	      | The author of this content.                      | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=”datePublished“    | Date of first broadcast/publication.             | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“operatingSystems” | The operating systems supported.                 | [SoftwareApplication](http://schema.org/SoftwareApplication) |
+| itemprop=“fileSize”         | Size of the application.                         | [SoftwareApplication](http://schema.org/SoftwareApplication) |
+| itemprop=“interactionCount” | A count of a specific user interaction with this item. | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“contentRating”    | Official rating for a piece of content.	         | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“bestRating”       | The highest possible rating.                     | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingValue”      | The rating for the content.                      | [Rating](http://schema.org/Rating) |
+| itemprop=“ratingCount”      | The number of ratings obtained.                  | [AggregateRating](http://schema.org/AggregateRating) |
+| itemprop=“price”            | The price of the item.                           | [Offer](http://schema.org/Offer) |
+
+### 9.3 The mark-up
+
+Utilising Software Application mark-up:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "SoftwareApplication",
+  "image": "[software application icon image url]",
+  "name": "[name of the software application]",
+  "author": {
+    "@type": "Organization",
+    "url": "[author url]",
+    "name": "[developer name]"
+  },
+  "aggregateRating": {
+    "@type" : "AggregateRating",
+    "ratingValue" : "[rating given]",
+    "bestRating" : "[highest possible rating]",
+    "ratingCount" : "[total number of ratings]"
+  },
+  "datePublished": "[date in ISO format e.g. 2012-04-15]",
+  "fileSize" : "[file size e.g. 14mb]",
+  "interactionCount" : "[number of user downloads]",
+  "contentRating" : "[content rating e.g. Low Maturity]",
+  "description" : "[description of the software application]",
+  "downloadURL" : "[download url]"
+  "operatingSystem" : [
+    "[operating system 1]",
+    "[operating system 2]"
+  ],
+  "applicationCategory" : "[application category e.g. http://schema.org/GameApplication]",
+  "Offers": {
+    "@type" : "Offer",
+    "price" : "[app price]"
+ }
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/SoftwareApplication">
+  <img itemprop="image" src="[software application icon image url]" />
+  <span itemprop="name">[name of application]</span> -
+  <div itemprop="author" itemscope itemtype="http://schema.org/Organization">
+    <a itemprop="url" href="[author url]"><span itemprop="name">[developer name]</span></a>
+  </div>
+  <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+    <span itemprop="ratingValue">[rating given]</span>/
+    <span itemprop="bestRating">[highest possible rating]</span> stars from
+    <span itemprop="ratingCount">[total number of ratings]</span> users.
+  </div>
+  <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+    <span itemprop="price">[price]</span>
+  </div>
+  <span itemprop="description">[description of application]</span>
+  <a itemprop="downloadURL" href="[download url]">Download</a>
+  <time itemprop="datePublished" datetime="[date in ISO format e.g. 2012-04-15]">[publication date]</time>
+  <span itemprop="operatingSystems">[supported operating systems]</span>
+  <span itemprop="applicationCategory">[category]</span>
+  <meta itemprop="fileSize" content="[file size e.g. 14MB]"/>
+  <meta itemprop="interactionCount" content="[number of downloads] UserDownloads">
+</div>
+```
+
+### 9.4 The Test…
+
+Filling in the blanks, the resulting snippet using the structured data testing tool should resemble something like this:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/9-4test.jpg" />
+
+**Further Reading:** [SoftwareApplication](http://schema.org/SoftwareApplication) – Schema.org, [Rich Snippets: Software applications](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1645432) – Google Webmaster Help
+
+# Tell Us About Yourself with Person Mark-up
+
+### 10.1 Example snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/10-1example.jpg" />
+
+### 10.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Person                     | Describes a person (living, dead or fictional).             |
+| http://www.schema.org/PostalAddress              | The location of the event or organization.                  |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.              | All |
+| itemprop=“image”            | URL of an image of the person.                     | All |
+| itemprop=“jobTitle”         | The job title of the person.                       | [Person](http://schema.org/Person) |
+| itemprop=“address”          | Physical address of the person.                    | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“addressLocality”  | The address locality of the person.                | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“addressRegion”    | The region in which the person resides.            | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“postalCode”	      | The postal code.                                   | [PostalAddress](http://schema.org/PostalAddress) |
+| itemprop=“telephone”        | The person’s telephone number.                     | [Person](http://schema.org/Person) |
+| itemprop=“email”            | The person’s email address.                        | [Person](http://schema.org/Person) |
+
+### 10.3 The mark-up
+
+Utilising Person mark-up:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type" : "Person",
+  "name" : "[person's name]",
+  "image" : "[image url of person]",
+  "jobTitle": "[job tile]",
+  "address" : {
+    "@type" : "PostalAddress",
+    "addressLocality" : "[Locality]",
+    "addressRegion" : "[region]",
+    "postalCode" : "[postal code]"
+  },
+  "telephone" : "[telephone number]",
+  "email" : "[email address]"
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Person">
+  <span itemprop="name">[person’s name]</span>
+  <img src="[image url of person]" itemprop="image" />
+  <span itemprop="jobTitle">[job title]</span>
+  <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+    <span itemprop="addressLocality">[locality]</span>,
+    <span itemprop="addressRegion">[region]</span>
+    <span itemprop="postalCode">[postal code]</span>
+  </div>
+  <span itemprop="telephone">[telephone number]</span>
+  <a href="mailto:[email address]" itemprop="email">jane-doe@xyz.edu</a>
+</div>
+```
+
+**Further Reading:** [Person](http://schema.org/Person) – Schema.org, [Rich Snippets: People](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=146646) – Google Webmaster Help
+
+# Sell Tickets for Multiple Events with a Single Search Listing
+
+### 11.1 Example snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/11-1example.jpg" />
+
+Live examples of Schema.org/Event are very scarce at the moment, with the majority of sites opting for Microdata, Microformats or RDFa equivalent mark-up. Up to 3 entries of Event mark-up can be seen within the rich snippet.
+
+### 11.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+|http://www.schema.org/Event | Describes an upcoming event. |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.              | All |
+| itemprop=“url”              | URL of the item.                                   | All |
+| itemprop=“location”         | The location of the event.	                   | [Event](http://schema.org/Event) |
+| itemprop=“startDate”        | The start date and time of the event.              | [Event](http://schema.org/Event) |
+
+### 11.3 The mark-up
+
+Utilising Event mark-up:
+
+**JSON-LD**
+
+```javascript
+REPEAT FOR EACH EVENT:
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type" : "Event",
+  "name" : "[event name]",
+  "url" : "[event url]",
+  "location": {
+    "@type" : "Place",
+    "name" : "[location name]",
+    "address" : "[event location]"
+    },
+  "startDate": "[date in ISO format e.g. 2013-03-16]"
+  }
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemprop="event" itemscope itemtype="http://schema.org/Event">
+  <a href="[event url]" itemprop="url">
+    <span itemprop="name">[event name]</span>
+  </a>
+  <span itemprop="location">[event location]</span>
+  <meta itemprop="startDate" content="[date in ISO format e.g. 2013-03-16]">
+</div>
+<div itemprop="event" itemscope itemtype="http://schema.org/Event">
+  <a href="[event url]" itemprop="url">
+    <span itemprop="name">[event name]</span>
+  </a>
+  <span itemprop="location">[event location]</span>
+  <meta itemprop="startDate" content="[date in ISO format e.g. 2013-03-16]">
+</div>
+```
+
+**Further Reading:** [Event](http://schema.org/Event) – Schema.org, [Rich Snippets: Events](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=164506&topic=1088474&ctx=topic) – Google Webmaster Help
 
 # To be continued...
