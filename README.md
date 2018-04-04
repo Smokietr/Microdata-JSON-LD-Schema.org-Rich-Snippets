@@ -3,6 +3,8 @@ This guide has been created to provide a quick and easy way of generating differ
 
 I must point out that before you proceed with integrating any form of mark-up, you should be aware of the guidelines provided by Google, and Bing. Any attempt to mark-up content that is invisible to users, or content that is irrelevant/misleading just to generate the rich snippet may result in action being taken against your website.
 
+[**Microdata JSON LD Schema.org Rich-Snippets**](https://smokietr.github.io/Microdata-JSON-LD-Schema.org-Rich-Snippets/)
+
 1. [**What is Microdata?**](#what-is-microdata)
 2. [**What is JSON-LD**](#what-is-json-ld)
 3. [**What is Schema.org?**](#what-is-schemaorg)
@@ -18,8 +20,8 @@ I must point out that before you proceed with integrating any form of mark-up, y
 13. [**Promote Software Applications in Search Results**](#promote-software-applications-in-search-results)
 14. [**Tell Us About Yourself with Person Mark-up**](#tell-us-about-yourself-with-person-mark-up)
 15. [**Sell Tickets for Multiple Events with a Single Search Listing**](#sell-tickets-for-multiple-events-with-a-single-search-listing)
-16. Dramatically Increase Size of Search Results for Audio Coverage
-17. Generate Rich Media Listings with Video Mark-up
+16. [**Dramatically Increase Size of Search Results for Audio Coverage**](#dramatically-increase-size-of-search-results-for-audio-coverage)
+17. [**Generate Rich Media Listings with Video Mark-up**](#generate-rich-media-listings-with-video-mark-up)
 18. Create Interactive Breadcrumb Trails for your Search Listings
 19. Logo & Social Sitelinks in Knowledge Graph
 20. SearchAction – Sitelinks Search Box
@@ -1286,7 +1288,7 @@ Live examples of Schema.org/Event are very scarce at the moment, with the majori
 
 | Itemtype      | Description   |
 | ------------- | ------------- |
-|http://www.schema.org/Event | Describes an upcoming event. |
+| http://www.schema.org/Event | Describes an upcoming event. |
 
 **Itemprop** attributes utilised:
 
@@ -1341,5 +1343,159 @@ REPEAT FOR EACH EVENT:
 ```
 
 **Further Reading:** [Event](http://schema.org/Event) – Schema.org, [Rich Snippets: Events](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=164506&topic=1088474&ctx=topic) – Google Webmaster Help
+
+# Dramatically Increase Size of Search Results for Audio Coverage
+
+### 12.1 Example snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/12-1example.jpg" />
+
+### 12.2 The core mark-up features at a glance:
+
+**Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/MusicPlaylist  | A collection of music tracks in a playlist form. |
+| http://www.schema.org/MusicRecording | A single song or track.                          |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.              | All |
+| itemprop=“numTracks”        | Number of tracks in the album/playlist.            | [MusicPlaylist](http://schema.org/MusicPlaylist) |
+| itemprop=“track”            | A single track.                                    | [MusicPlaylist](http://schema.org/MusicPlaylist) |
+| itemprop=“byArtist”         | The artist that performed this album or track.     | [MusicRecording](http://schema.org/MusicRecording) |
+| itemprop=“url”              | The URL of the item.                               | All |
+| itemprop=“duration”         | The length of the track or album.                  | [MusicRecording](http://schema.org/MusicRecording) |
+| itemprop=“inAlbum”          | The album the track is from.                       | [MusicRecording](http://schema.org/MusicRecording) |
+
+### 12.3 The mark-up
+
+Up to four tracks can be displayed within the rich snippet:
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type" : "MusicPlaylist",
+  "name" : "[name of playlist]",
+  "numTracks" : "[no. of tracks in playlist]",
+  "track" : [
+  {
+    "@type" : "MusicRecording",
+    "name" : "[track name]",
+    "byArtist" : "[artist name]",
+    "url" : "[artist url]",
+    "duration" : "[track duration in ISO format e.g. PT4M45S]",
+    "inAlbum" : "[album name]"
+  },
+  {
+    "@type" : "MusicRecording",
+    "name" : "[track name]",
+    "byArtist" : "[artist name]",
+    "url" : "[artist url]",
+    "duration" : "[track duration in ISO format e.g. PT4M45S]",
+    "inAlbum" : "[album name]"
+  }
+ ]
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/MusicPlaylist">
+  <span itemprop="name">[name of playlist]</span>
+  <meta itemprop="numTracks" content="[no. of tracks in playlist]"/>
+  <div itemprop="track" itemscope itemtype="http://schema.org/MusicRecording">
+    1.<span itemprop="name">[track name]</span> -
+    <span itemprop="byArtist">[artist name]</span>
+    <meta content="[artist url]" itemprop="url" />
+    <meta content="[duration in ISO format e.g. PT4M45S]" itemprop="duration" />
+    <meta content="[album name]" itemprop="inAlbum" />
+   </div>
+  <div itemprop="track" itemscope itemtype="http://schema.org/MusicRecording">
+    2.<span itemprop="name">[track name]</span> -
+    <span itemprop="byArtist">[artist name]</span>
+    <meta content="[artist url]" itemprop="url" />
+    <meta content="[duration in ISO format e.g. PT3M32S]" itemprop="duration" />
+    <meta content="[album name" itemprop="inAlbum" />
+  </div>
+</div>
+```
+
+### 12.4 The test:
+
+Please note, due to the 1500 character length within the testing tool, only two tracks can be displayed:
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/12-5test.jpg" />
+
+**Further Reading:** [MusicPlaylist](http://schema.org/MusicPlaylist) & [MusicRecording](http://schema.org/MusicRecording) – Schema.org, [Rich Snippets: Music](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=1623047) – Google Webmaster Help
+
+# Generate Rich Media Listings with Video Mark-up
+
+### 13.1 Example live rich media snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/13-1test.jpg" />
+
+### 13.2 Considerations
+
+Please note that the utilisation of Microdata and Schema.org is not enough to convert video content into the above rich media listing in search results. This mark-up should also be combined with:
+
+ - Video XML sitemaps
+ - Unique text content including video title, description, thumbnail – different to that seen elsewhere on the web (including YouTube).
+ 
+ ### 13.2 The core mark-up features at a glance:
+ 
+ **Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/VideoObject | A collection of music tracks in a playlist form. |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.              | All |
+| itemprop=“duration”         | Number of tracks in the album/playlist             | [MediaObject](http://schema.org/MediaObject) |
+| itemprop=“thumbnail”        | A thumbnail image for a video or image.            | [ImageObject](http://schema.org/ImageObject) |
+| itemprop=“description”      | Description of the item.	                   | All |
+
+### 13.3 The mark-up
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "VideoObject",
+  "name" : "[name of video]",
+  "duration" : "[duration in ISO format e.g. T1M33S]",
+  "thumbnail" : "[thumbnail url]",
+  "description" : "[description of video]"
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+  <span itemprop="name">[name of video]</span>
+  <meta itemprop="duration" content="[duration in ISO format e.g. T1M33S]" />
+  <meta itemprop="thumbnail" content="[thumbnail-url]" />
+  video object code
+  <span itemprop="description">[description of video]</span>
+</div>
+```
+
+**Further Reading:** [VideoObject](http://schema.org/VideoObject) – Schema.org, [Schema.org markup for videos](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=2413309&topic=1088474&ctx=topic) – Google Webmaster Help, [Getting Video Results in Google](http://www.distilled.net/blog/video/getting-video-results-in-google/) – Distilled
 
 # To be continued...
