@@ -89,7 +89,7 @@ Marking up content on your website can:
 - Provide greater information to search engines to improve their understanding of the content on your website.
 
 ## Using Review Data to Enhance Your Search Result Snippets
-### Example live snippet
+### 1.1 Example live snippet
 <img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/sg-ebay.png">
 
 ### 1.2 The core mark-up features at a glance:
