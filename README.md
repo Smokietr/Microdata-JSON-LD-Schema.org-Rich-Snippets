@@ -24,8 +24,8 @@ I must point out that before you proceed with integrating any form of mark-up, y
 17. [**Generate Rich Media Listings with Video Mark-up**](#generate-rich-media-listings-with-video-mark-up)
 18. [**Create Interactive Breadcrumb Trails for your Search Listings**](#create-interactive-breadcrumb-trails-for-your-search-listings)
 19. [**Logo & Social Sitelinks in Knowledge Graph**](#logo--social-sitelinks-in-knowledge-graph)
-20. SearchAction – Sitelinks Search Box
-21. InDepth Article Markup
+20. [**SearchAction – Sitelinks Search Box**](#searchAction-sitelinks-search-box)
+21. [**InDepth Article Markup**](#indepth-article-markup)
 22. Gmail
     - View Action
     - Save Action
@@ -57,9 +57,9 @@ Microdata (like RDFa and Microformats) is a form of semantic mark-up designed to
 </div>
 ```
 
-- [X] 1 - Itemscope – is an indicator that the content within this <div> is an item.
-- [X] 2 - Itemtype – describes what the item is, in the above instance ‘Person’.
-- [X] 3 - Itemprop – describes each property of the specific item.
+- [X] 1 - **Itemscope** – is an indicator that the content within this <div> is an item.
+- [X] 2 - **Itemtype** – describes what the item is, in the above instance ‘Person’.
+- [X] 3 - **Itemprop** – describes each property of the specific item.
   
 **Further Reading:** [About microDATA](https://developers.google.com/search/docs/guides/intro-structured-data?visit_id=1-636582308679739602-3891983355&hl=en&rd=1) – Google Webmaster Help, [HTML Microdata](https://www.w3.org/TR/microdata/) – W3C
   
@@ -1589,5 +1589,128 @@ Follow us on <a href="[profile url]" itemprop="sameAs">Twitter</a>, <a href="[pr
 ```
 
 **Further Reading:** [Social Profiles](https://developers.google.com/webmasters/structured-data/customize/social-profiles/) – Google Developers, [Using Schema.org Markup for Organization](http://googlewebmastercentral.blogspot.co.uk/2013/05/using-schemaorg-markup-for-organization.html) – Google Webmaster Help.
+
+# SearchAction – Sitelinks Search Box
+
+### 16.1 Example live snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/sitelinks-searchbox.jpg" />
+
+Search engines are starting to make use of Action based schema.org in search results, starting with the Sitelinks search box.
+
+### 16.2 The Core Mark-Up Features at a Glance:
+
+ **Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Website	        | A set of web pages on a single domain. |
+| http://www.schema.org/SearchAction	| The action to search. |
+
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“url”              | URL of the item.                                    | All |
+| itemprop=“potentialAction”  | Describes the action being taken.	            | [Action](http://schema.org/Action) |
+| itemprop=“target”           | Specifies destination or entry point of action.	    | [Action](http://schema.org/Action) |
+| itemprop=“query-input”      | The query used for this action.	                    | [SearchAction](http://schema.org/SearchAction) |
+
+### 16.3 The Mark-Up
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "[website url]",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "[website search url]={search_term}",
+    "query-input": "required name=search_term"
+  }
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/WebSite">
+  <meta itemprop="url" content="[website url]"/>
+  <form itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+    <meta itemprop="target" content="[website search url]={search_term}"/>
+    <input itemprop="query-input" type="text" name="search_term">
+    <input type="submit">
+  </form>
+</div>
+```
+
+**Further Reading:** [Sitelinks Search Box](https://developers.google.com/webmasters/structured-data/slsb-overview) – Google Developers.
+
+# InDepth Article Markup
+
+### 17.1 Example live snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/indeptharitcles.jpg" />
+
+Although algorithmic based, the chances of this type of result occurring increase when web pages are combined with Article mark-up.
+
+### 17.2 The Core Mark-Up Features at a Glance:
+
+ **Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Article	 | An article or news story. |
+
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“headline”	         | Main article title.	                            | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“alternativeHeadline” | Article sub title.	         	            | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“image”               | Main article image URL.	          	    | All |
+| itemprop=“author”	         | The name of the article author.                  | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“datePublished”       | Article publication date.                        | [CreativeWork](http://schema.org/CreativeWork) |
+| itemprop=“description”         | Summary of the article.	                    | All |
+| itemprop=“articleBody”         | Article body content.	                    | [Article](http://schema.org/Article) |
+
+### 17.3 The Mark-Up
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{ 
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "headline": "[article title]",
+  "alternativeHeadline": "[article sub heading]",
+  "image": "[main article image url]",
+  "author": "[author name]",
+  "datePublished": "[date in ISO format e.g. 2014-03-16]",
+  "description": "[article summary]"
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Article">
+  <h1 itemprop="headline">[article headline]</h1>
+  <h2 itemprop="alternativeHeadline">[alternative headline]</h2>
+  <img src="[main article image url]" itemprop="image" />
+  <span itemprop="author">[author name]</span>
+  <span itemprop="datePublished">[publication date in ISO format e.g. 2014-03-16]</span>
+  <span itemprop="description">[article summary]</span>
+  <div itemprop="articleBody">[article content]</div>
+</div>
+```
 
 # To be continued...
