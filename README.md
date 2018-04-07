@@ -22,8 +22,8 @@ I must point out that before you proceed with integrating any form of mark-up, y
 15. [**Sell Tickets for Multiple Events with a Single Search Listing**](#sell-tickets-for-multiple-events-with-a-single-search-listing)
 16. [**Dramatically Increase Size of Search Results for Audio Coverage**](#dramatically-increase-size-of-search-results-for-audio-coverage)
 17. [**Generate Rich Media Listings with Video Mark-up**](#generate-rich-media-listings-with-video-mark-up)
-18. Create Interactive Breadcrumb Trails for your Search Listings
-19. Logo & Social Sitelinks in Knowledge Graph
+18. [**Create Interactive Breadcrumb Trails for your Search Listings**](#create-interactive-breadcrumb-trails-for-your-search-listings)
+19. [**Logo & Social Sitelinks in Knowledge Graph**](#logo--social-sitelinks-in-knowledge-graph)
 20. SearchAction – Sitelinks Search Box
 21. InDepth Article Markup
 22. Gmail
@@ -1497,5 +1497,97 @@ Please note that the utilisation of Microdata and Schema.org is not enough to co
 ```
 
 **Further Reading:** [VideoObject](http://schema.org/VideoObject) – Schema.org, [Schema.org markup for videos](http://support.google.com/webmasters/bin/answer.py?hl=en&answer=2413309&topic=1088474&ctx=topic) – Google Webmaster Help, [Getting Video Results in Google](http://www.distilled.net/blog/video/getting-video-results-in-google/) – Distilled
+
+# Create Interactive Breadcrumb Trails for your Search Listings
+
+### 14.1 Example live snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/14-1example.jpg" />
+
+Currently the Schema.org mark-up does not yet lead to the above rich URL format being presented unlike other formats such as Microdata and RDFa, although hopefully will in the near future.
+
+### 14.2 The Mark-Up
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+  <a href="[parent url]" itemprop="url">
+    <span itemprop="title">[page name]</span>
+  </a>
+</div>
+<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+  <a href="[child url]" itemprop="url">
+    <span itemprop="title">[page name]</span>
+  </a>
+</div>
+<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+  <a href="[child url]" itemprop="url">
+    <span itemprop="title">[page name]</span>
+  </a>
+</div>
+```
+
+**Further Reading:** [Rich snippets – Breadcrumbs](#http://support.google.com/webmasters/bin/answer.py?hl=en&answer=185417) – Google Webmaster Help
+
+# Logo & Social Sitelinks in Knowledge Graph
+
+### 15.1 Example live snippet
+
+<img src="https://36bvmt283fg61unuud3h7qua-wpengine.netdna-ssl.com/wp-content/uploads/2015/01/social-sitelinks.jpg" />
+
+Both the logo and social profile links displayed in Google’s Knowledge Graph can be leveraged using schema.org.
+
+### 15.2 The Core Mark-Up Features at a Glance:
+
+ **Itemtype** attributes utilised:
+
+| Itemtype      | Description   |
+| ------------- | ------------- |
+| http://www.schema.org/Organization | An organization such as a school, corporation etc. |
+
+**Itemprop** attributes utilised:
+
+| Itemprop      | Description   | Property of   |
+| ------------- | ------------- | ------------- |
+| itemprop=“name”             | The name of the item being marked up.               | All |
+| itemprop=“logo”             | An associated logo.	                            | [Organization](http://schema.org/Organization) |
+| itemprop=“url”              | URL of the item.                                    | All |
+| itemprop=“sameAs”           | URL of a web page that indicates the items identity.| [Property](http://schema.org/Property) |
+
+### 15.3 The Mark-Up
+
+**JSON-LD**
+
+```javascript
+<script type="application/ld+json">
+{ 
+  "@context" : "http://schema.org",
+  "@type" : "Organization",
+  "name" : "[organization name]",
+  "logo" : "[logo image url]",
+  "url" : "[website url]",
+  "sameAs" : [
+    "https://twitter.com/[username]",
+    "https://www.facebook.com/[username]",
+    "https://www.linkedin.com/company/[username]",
+    "https://plus.google.com/[username]/posts"
+  ]
+}
+</script>
+```
+
+**Microdata**
+
+```HTML
+<div itemscope itemtype="http://schema.org/Organization">
+  <span itemprop="name">[organization name]</span>
+  <img src="[logo image url]" itemprop="logo" />
+  <a href="[website url]">Website</a>
+Follow us on <a href="[profile url]" itemprop="sameAs">Twitter</a>, <a href="[profile url]" itemprop="sameAs">Facebook, <a href="[profile url]" itemprop="sameAs">Google+ and <a href="[profile url]" itemprop="sameAs">LinkedIn</a>.
+</div>
+```
+
+**Further Reading:** [Social Profiles](https://developers.google.com/webmasters/structured-data/customize/social-profiles/) – Google Developers, [Using Schema.org Markup for Organization](http://googlewebmastercentral.blogspot.co.uk/2013/05/using-schemaorg-markup-for-organization.html) – Google Webmaster Help.
 
 # To be continued...
